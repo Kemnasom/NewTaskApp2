@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Sheet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Tasks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Task</th>
+                <th>Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.task }}</td>
+                <td class="task-status {{ 'completed' if task.completed else 'not-completed' }}">
+                    {{ 'Completed' if task.completed else 'Not Completed' }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Add Task</h2>
+    <form method="POST" action="/add_task">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="task">Task:</label>
+        <input type="text" id="task" name="task"><br><br>
+        <label for="completed">Completed:</label>
+        <input type="checkbox" id="completed" name="completed"><br><br>
+        <button type="submit">Add Task</button>
+    </form>
+</body>
+</html>
